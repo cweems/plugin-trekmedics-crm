@@ -17,11 +17,13 @@ export default class TrekmedicsCrmPlugin extends FlexPlugin {
    * @param manager { import('@twilio/flex-ui').Manager }
    */
   init(flex, manager) {
-    flex.AgentDesktopView.Panel1.Content.add(
-      <CustomTaskListComponent key="demo-component" />,
-      {
-        sortOrder: -1,
-      }
-    );
+
+    flex.AgentDesktopView.defaultProps.splitterOptions = {
+      minimumSecondPanelSize: '75%',
+    }
+
+    flex.CRMContainer.defaultProps.uriCallback = (task) => {
+      return task ? "https://beacon.trekmedics.org/#/newIncident" : "https://beacon.trekmedics.org/#/dashboard";
+    }
   }
 }
